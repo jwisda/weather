@@ -67,17 +67,17 @@ func ForecastHandler(w http.ResponseWriter, r *http.Request) {
 	alerts := ""
 
 	//temperature
-	if current, ok := forecast["current"].(map[string]string); ok {
-		if currentTemp, err := strconv.ParseFloat(current["temp"], 64); err == nil {
-			if currentTemp > hot {
-				temperature = temps[2]
-			}
-			if currentTemp < cold {
-				temperature = temps[0]
-			}
+	//temperature
+	if current, ok := forecast["current"].(map[string]interface{}); ok {
+		currentTemp := current["temp"].(float64)
+		if currentTemp > hot {
+			temperature = temps[2]
 		}
-	}
+		if currentTemp < cold {
+			temperature = temps[0]
+		}
 
+	}
 	//conditions
 	if currentWeather, ok := forecast["current"].(map[string]interface{}); ok {
 		if weatherList, aok := currentWeather["weather"].([]interface{}); aok {
