@@ -67,7 +67,6 @@ func ForecastHandler(w http.ResponseWriter, r *http.Request) {
 	alerts := ""
 
 	//temperature
-	//temperature
 	if current, ok := forecast["current"].(map[string]interface{}); ok {
 		currentTemp := current["temp"].(float64)
 		if currentTemp > hot {
@@ -76,8 +75,8 @@ func ForecastHandler(w http.ResponseWriter, r *http.Request) {
 		if currentTemp < cold {
 			temperature = temps[0]
 		}
-
 	}
+
 	//conditions
 	if currentWeather, ok := forecast["current"].(map[string]interface{}); ok {
 		if weatherList, aok := currentWeather["weather"].([]interface{}); aok {
